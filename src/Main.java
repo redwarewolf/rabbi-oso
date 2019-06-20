@@ -13,10 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-
-import java.awt.FlowLayout;
 
 
 class Main {
@@ -53,8 +49,8 @@ class Main {
 	frame.setTitle("Rabbi-Oso");
 	// frame.setSize(800, 600);
 	
-	JButton fileOpener=new JButton("Open File");
-	fileOpener.setBounds(100,100,140, 40); 
+	JButton fileEncrypter=new JButton("Encrypt File");
+	fileEncrypter.setBounds(100,100,140, 40); 
 	
 	JLabel messageLabel = new JLabel();		
 	messageLabel.setText("File Content:");
@@ -78,14 +74,19 @@ class Main {
     frame.getContentPane().add(keyTextfield);
     frame.add(IVLabel);
     frame.getContentPane().add(IVtextField);
-    frame.add(fileOpener);
+    frame.add(fileEncrypter);
        
     
     frame.add(messageLabel);
     frame.add(fileContentLabel);
     
-    // Acción de abrir archivo con botón
-    fileOpener.addActionListener(new ActionListener() {
+	JButton fileDesencrypter=new JButton("Desencrypt File");
+	fileDesencrypter.setBounds(100,100,140, 40);
+	
+	frame.add(fileDesencrypter);
+    
+    // Acción de abrir archivo con botón para encriptar
+    fileEncrypter.addActionListener(new ActionListener() {
     	@Override
     	public void actionPerformed(ActionEvent arg0) {
     		JFileChooser chooser= new JFileChooser();
@@ -95,26 +96,57 @@ class Main {
             String filename= file.getAbsolutePath();
             
             try{
-            	// Printeo el nombre del archivo que abrí - Esto Funciona =O
+            	// Lógica tras abrir el archivo a encriptar
             	
             	System.out.println(filename);
             	
                 FileReader reader = new FileReader(filename);
                 BufferedReader bufferedreader = new BufferedReader(reader);
-                
-                //Pongo contenidos del archivo en el label.
-                               
+                                               
                 byte[] data = new byte[(int) file.length()];
                 FileInputStream fis = new FileInputStream(file);
                 
-                
+                // Header para los BMP es 14 (creo)
+
                 int header = 14;
-                // El 0 es el offset, acá mismo podemos evitar el header.
                 fis.read(data, header, data.length);
                 fis.close();
                 
                 fileContentLabel.setText(data.toString());
                 
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+    	}
+    });
+    
+    
+    fileDesencrypter.addActionListener(new ActionListener() {
+    	@Override
+    	public void actionPerformed(ActionEvent arg0) {
+    		JFileChooser chooser= new JFileChooser();
+            chooser.setCurrentDirectory(new File("c:\\"));
+            int value = chooser.showOpenDialog(null);
+            File file= chooser.getSelectedFile();
+            String filename= file.getAbsolutePath();
+            
+            try{
+            	// Lógica tras abrir el archivo a desencriptar
+            	
+            	System.out.println(filename);
+            	
+                FileReader reader = new FileReader(filename);
+                BufferedReader bufferedreader = new BufferedReader(reader);
+                                               
+                byte[] data = new byte[(int) file.length()];
+                FileInputStream fis = new FileInputStream(file);
+                
+                // Header para los BMP es 14 (creo)
+
+                int header = 14;
+                fis.read(data, header, data.length);
+                fis.close();
+                                
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
             }
