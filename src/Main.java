@@ -93,26 +93,14 @@ class Main {
             chooser.setCurrentDirectory(new File("c:\\"));
             int value = chooser.showOpenDialog(null);
             File file= chooser.getSelectedFile();
-            String filename= file.getAbsolutePath();
+            String path= file.getAbsolutePath();
             
             try{
             	// Lógica tras abrir el archivo a encriptar
             	
-            	System.out.println(filename);
-            	
-                FileReader reader = new FileReader(filename);
-                BufferedReader bufferedreader = new BufferedReader(reader);
-                                               
-                byte[] data = new byte[(int) file.length()];
-                FileInputStream fis = new FileInputStream(file);
+            	System.out.println(path);
                 
-                // Header para los BMP es 14 (creo)
-
-                int header = 14;
-                fis.read(data, header, data.length);
-                fis.close();
-                
-                fileContentLabel.setText(data.toString());
+                fileContentLabel.setText(Imagen.LeerImagen(file).toString());
                 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
@@ -128,24 +116,15 @@ class Main {
             chooser.setCurrentDirectory(new File("c:\\"));
             int value = chooser.showOpenDialog(null);
             File file= chooser.getSelectedFile();
-            String filename= file.getAbsolutePath();
+            String path= file.getAbsolutePath();
             
             try{
             	// Lógica tras abrir el archivo a desencriptar
             	
-            	System.out.println(filename);
+            	System.out.println(path);
             	
-                FileReader reader = new FileReader(filename);
-                BufferedReader bufferedreader = new BufferedReader(reader);
-                                               
-                byte[] data = new byte[(int) file.length()];
-                FileInputStream fis = new FileInputStream(file);
-                
-                // Header para los BMP es 14 (creo)
-
-                int header = 14;
-                fis.read(data, header, data.length);
-                fis.close();
+            	fileContentLabel.setText(Imagen.LeerImagen(file).toString());
+     
                                 
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,e);
