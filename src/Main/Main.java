@@ -9,7 +9,7 @@ class Main {
 		
 		  
 		/*Rabbit rabbit = new Rabbit();
-		String message = "Hello world!";
+		String message = "Hello world!asdadwadefefasdwxawexrw3qxaweqw2xe";
 		String key = "abcdefghijklmnqw";
 		String IV = "trkfbiuh";
 		boolean addPadding = true;
