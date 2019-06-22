@@ -7,6 +7,9 @@ import java.util.Arrays;
 import Main.Rabbit;
 
 public class Imagen {
+	
+	
+	static int HEADER_OFFSET = 13;
 
 	public static byte[] LeerImagen (File bmp) throws IOException {                            
 		byte[] data = Files.readAllBytes(bmp.toPath());
@@ -16,7 +19,7 @@ public class Imagen {
 	
 	public static byte[] composeByteArray(byte[] a, byte[] b) {
 		
-		byte[] composedEncryptedArray = new byte[a.length + b.length + 1];
+		byte[] composedEncryptedArray = new byte[a.length + b.length];
 		
 		for (int i = 0; i <  a.length; i++) {
 			composedEncryptedArray[i] = a[i];
@@ -33,12 +36,12 @@ public class Imagen {
 		
 		byte[] fullBMP = Imagen.LeerImagen(file);
 		
-		byte[] header = Arrays.copyOfRange(fullBMP, 0, 14);
-		byte[] data = Arrays.copyOfRange(fullBMP,15,fullBMP.length);
+		byte[] header = Arrays.copyOfRange(fullBMP, 0, HEADER_OFFSET);
+		byte[] data = Arrays.copyOfRange(fullBMP,HEADER_OFFSET + 1,fullBMP.length);
 
 		
 		Rabbit algorithm = new Rabbit();
-		byte[] encryptedData = algorithm.encryptMessage(data.toString(), /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, true);
+		byte[] encryptedData = algorithm.encryptMessage(new String(data), /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
 		//TODO Revisar porque el largo de <data> no es igual al de <encryptedData>
 
 		FileOutputStream outFile = new FileOutputStream(file.getPath() + "2");
@@ -52,12 +55,12 @@ public static void decryptFile(File file) throws IOException {
 		
 		byte[] fullBMP = Imagen.LeerImagen(file);
 		
-		byte[] header = Arrays.copyOfRange(fullBMP, 0, 14);
-		byte[] data = Arrays.copyOfRange(fullBMP,15,fullBMP.length);
+		byte[] header = Arrays.copyOfRange(fullBMP, 0, HEADER_OFFSET);
+		byte[] data = Arrays.copyOfRange(fullBMP,HEADER_OFFSET + 1,fullBMP.length);
 
 		
 		Rabbit algorithm = new Rabbit();
-		String decryptedData = algorithm.decryptMessage(data, /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, true);
+		String decryptedData = algorithm.decryptMessage(data, /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
 		
 		//TODO Revisar porque el largo de <data> no es igual al de <encryptedData>
 
