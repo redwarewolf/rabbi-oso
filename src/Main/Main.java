@@ -10,13 +10,12 @@ class Main {
 		  
 		Rabbit rabbit = new Rabbit();
 		String message = "Hello world!";
-		String key = "ThisIsMyKey,DontGiveItAround";
-		String IV = "AVeryCoolIV";
+		String key = "abcdefghijklmnqw";
+		String IV = "trkfbiuh";
 		boolean addPadding = true;
 		boolean trimPadding = true;
 		
-		byte[] encryptedMessage = rabbit.encryptMessage(message, key, IV,
-				addPadding);
+		byte[] encryptedMessage = rabbit.encryptMessage(message, key, IV,addPadding);
 		
 		System.out.println(encryptedMessage);
 		

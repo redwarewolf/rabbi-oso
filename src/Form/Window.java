@@ -4,8 +4,24 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.util.Arrays;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -14,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import BMP.Imagen;
+import Main.Rabbit;
 
 public final class Window {
 	
@@ -41,18 +58,19 @@ public final class Window {
 				JFileChooser chooser= new JFileChooser();
 		        chooser.setCurrentDirectory(new File("c:\\"));
 		        int value = chooser.showOpenDialog(null);
-		        File file= chooser.getSelectedFile();
-		        String path= file.getAbsolutePath();
+		        File file = chooser.getSelectedFile();
+		        String path = "";
+		        if(file != null) path = file.getAbsolutePath();
 		        
 		        try{
 		        	// Lógica tras abrir el archivo a encriptar
 		        	
-		        	System.out.println(path);
-		            
-		            fileContentLabel.setText(Imagen.LeerImagen(file).toString());
-		            
+	        		System.out.println(path);
+	        		Imagen.encryptFile(file);
+	        		
 		        }catch(Exception e){
 		            JOptionPane.showMessageDialog(null,e);
+		            e.printStackTrace();
 		        }
 			}
 		});
