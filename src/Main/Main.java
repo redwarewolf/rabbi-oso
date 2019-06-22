@@ -8,7 +8,7 @@ class Main {
 		
 		
 		  
-		Rabbit rabbit = new Rabbit();
+		/*Rabbit rabbit = new Rabbit();
 		String message = "Hello world!";
 		String key = "abcdefghijklmnqw";
 		String IV = "trkfbiuh";
@@ -19,7 +19,7 @@ class Main {
 		
 		System.out.println(encryptedMessage);
 		
-		System.out.println(rabbit.decryptMessage(encryptedMessage, key, IV, trimPadding));
+		System.out.println(rabbit.decryptMessage(encryptedMessage, key, IV, trimPadding));*/
 		
 		Window.genForm();
 

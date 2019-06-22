@@ -89,8 +89,8 @@ public final class Window {
 		        	
 		        	System.out.println(path);
 		        	
-		        	fileContentLabel.setText(Imagen.LeerImagen(file).toString());
-		 
+		        	
+		        	Imagen.decryptFile(file);
 		                            
 		        }catch(Exception e){
 		            JOptionPane.showMessageDialog(null,e);
