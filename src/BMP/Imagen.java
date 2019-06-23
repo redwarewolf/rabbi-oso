@@ -12,8 +12,8 @@ import Main.Rabbit;
 
 public class Imagen {
 	
-	
-	static int HEADER_OFFSET = 100;
+	// Update de header: https://es.wikipedia.org/wiki/Windows_bitmap
+	static int HEADER_OFFSET = 54;
 
 	public static byte[] LeerImagen (File bmp) throws IOException {                            
 		byte[] data = Files.readAllBytes(bmp.toPath());
