@@ -11,7 +11,7 @@ import Main.Rabbit;
 public class Imagen {
 	
 	
-	static int HEADER_OFFSET = 100;
+	static int HEADER_OFFSET = 54;
 
 	public static byte[] LeerImagen (File bmp) throws IOException {                            
 		byte[] data = Files.readAllBytes(bmp.toPath());
@@ -44,6 +44,7 @@ public class Imagen {
 		byte[] fullBMP2 = composeByteArray(header,encryptedData);
 		FileOutputStream outFile = new FileOutputStream(Imagen.namePath(file, "E"));
 		outFile.write(fullBMP2);
+		outFile.close();
 
 		
 	}
@@ -63,6 +64,7 @@ public class Imagen {
 			byte[] fullBMP2 = composeByteArray(header,decryptedData);
 			FileOutputStream outFile = new FileOutputStream(Imagen.namePath(file, "D"));
 			outFile.write(fullBMP2);
+			outFile.close();
 		}
 	public static String namePath (File file, String num) {
 		return file.getPath().substring(0, file.getPath().length()-4).concat(num).concat(".bmp");
