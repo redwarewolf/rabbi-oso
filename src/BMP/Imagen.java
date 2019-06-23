@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 
-import javax.imageio.stream.ImageInputStream;
-
 import Main.Rabbit;
 
 public class Imagen {
@@ -61,8 +59,7 @@ public class Imagen {
 	
 			Rabbit algorithm = new Rabbit();
 			byte [] decryptedData = algorithm.decryptMessage(data, key, iv, false).getBytes();
-			
-			//TODO Revisar porque el largo de <data> no es igual al de <encryptedData>
+
 			byte[] fullBMP2 = composeByteArray(header,decryptedData);
 			FileOutputStream outFile = new FileOutputStream(Imagen.namePath(file, "D"));
 			outFile.write(fullBMP2);

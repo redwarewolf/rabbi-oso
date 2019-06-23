@@ -4,24 +4,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import javax.imageio.stream.ImageOutputStream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -30,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import BMP.Imagen;
-import Main.Rabbit;
 
 public final class Window {
 	
@@ -53,6 +35,7 @@ public final class Window {
     private static void defineActions() {
     	// Acción de abrir archivo con botón para encriptar
 		fileEncrypter.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser= new JFileChooser();
@@ -75,6 +58,7 @@ public final class Window {
 		});
 		
 		fileDesencrypter.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser= new JFileChooser();
