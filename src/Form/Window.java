@@ -62,8 +62,10 @@ public final class Window {
 		        try{
 		        	// Lógica tras abrir el archivo a encriptar
 		   
-	        		Imagen.encryptFile(file);
-	        		JOptionPane.showMessageDialog(frame, "Hecho!");
+	        		Imagen.encryptFile(file,keyTextfield.getText(),IVtextField.getText());
+	        		JOptionPane.showMessageDialog(frame, "Archivo cifrado!");
+	        		keyLabel.setText(null);
+	        		IVLabel.setText(null);
 	        		
 		        }catch(Exception e){
 		            JOptionPane.showMessageDialog(frame, "No se seleccionó el archivo");
@@ -81,8 +83,8 @@ public final class Window {
 		        File file= chooser.getSelectedFile();
 		      
 		        try{
-		        	Imagen.decryptFile(file);
-		        	JOptionPane.showMessageDialog(frame, "Hecho!");
+		        	Imagen.decryptFile(file,keyTextfield.getText(),IVtextField.getText());
+		        	JOptionPane.showMessageDialog(frame, "Archivo descifrado!");
 		        }catch(Exception e){
 		        	 JOptionPane.showMessageDialog(frame, "No se seleccionó el archivo");
 		        }
