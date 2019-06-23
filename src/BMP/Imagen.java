@@ -43,10 +43,10 @@ public class Imagen {
 		byte[] data = Arrays.copyOfRange(fullBMP,HEADER_OFFSET,fullBMP.length);
 
 		
-		//Rabbit algorithm = new Rabbit();
-		//byte[] encryptedData = algorithm.encryptMessage(new String(data), /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
+		Rabbit algorithm = new Rabbit();
+		byte[] encryptedData = algorithm.encryptMessage(new String(data), /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
 		
-		byte[] fullBMP2 = composeByteArray(header,data);
+		byte[] fullBMP2 = composeByteArray(header,encryptedData);
 		FileOutputStream outFile = new FileOutputStream(file.getPath() + "2");
 		outFile.write(fullBMP2);
 
@@ -57,20 +57,18 @@ public class Imagen {
 @SuppressWarnings("resource")
 public static void decryptFile(File file) throws IOException {
 		
-		byte[] fullBMP = Imagen.LeerImagen(file);
-		
-		byte[] header = Arrays.copyOfRange(fullBMP, 0, HEADER_OFFSET);
-		byte[] data = Arrays.copyOfRange(fullBMP,HEADER_OFFSET + 1,fullBMP.length);
+	byte[] fullBMP = Imagen.LeerImagen(file);
+	
+	byte[] header = Arrays.copyOfRange(fullBMP, 0, HEADER_OFFSET);
+	byte[] data = Arrays.copyOfRange(fullBMP,HEADER_OFFSET,fullBMP.length);
 
-		
 		Rabbit algorithm = new Rabbit();
-		String decryptedData = algorithm.decryptMessage(data, /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
+		byte [] decryptedData = algorithm.decryptMessage(data, /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false).getBytes();
 		
 		//TODO Revisar porque el largo de <data> no es igual al de <encryptedData>
-
+		byte[] fullBMP2 = composeByteArray(header,decryptedData);
 		FileOutputStream outFile = new FileOutputStream(file.getPath() + "3");
-		outFile.write(composeByteArray(header,decryptedData.getBytes()));
-		
+		outFile.write(fullBMP2);
 	}
 	
 	
