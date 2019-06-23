@@ -59,18 +59,15 @@ public final class Window {
 		        chooser.setCurrentDirectory(new File("c:\\"));
 		        int value = chooser.showOpenDialog(null);
 		        File file = chooser.getSelectedFile();
-		        String path = "";
-		        if(file != null) path = file.getAbsolutePath();
-		        
 		        try{
 		        	// Lógica tras abrir el archivo a encriptar
-		        	
-	        		System.out.println(path);
+		   
 	        		Imagen.encryptFile(file);
+	        		JOptionPane.showMessageDialog(frame, "Hecho!");
 	        		
 		        }catch(Exception e){
-		            JOptionPane.showMessageDialog(null,e);
-		            e.printStackTrace();
+		            JOptionPane.showMessageDialog(frame, "No se seleccionó el archivo");
+		      
 		        }
 			}
 		});
@@ -82,18 +79,12 @@ public final class Window {
 		        chooser.setCurrentDirectory(new File("c:\\"));
 		        int value = chooser.showOpenDialog(null);
 		        File file= chooser.getSelectedFile();
-		        String path= file.getAbsolutePath();
-		        
+		      
 		        try{
-		        	// Lógica tras abrir el archivo a desencriptar
-		        	
-		        	System.out.println(path);
-		        	
-		        	
 		        	Imagen.decryptFile(file);
-		                            
+		        	JOptionPane.showMessageDialog(frame, "Hecho!");
 		        }catch(Exception e){
-		            JOptionPane.showMessageDialog(null,e);
+		        	 JOptionPane.showMessageDialog(frame, "No se seleccionó el archivo");
 		        }
 			}
 		});

@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 
-import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
-
-import com.sun.xml.internal.ws.util.ByteArrayBuffer;
 
 import Main.Rabbit;
 
@@ -47,7 +44,7 @@ public class Imagen {
 		byte[] encryptedData = algorithm.encryptMessage(new String(data), /*keyLabel.getText()*/"abcdefghijklmnqw", "trkfbiuh"/*IVLabel.getText()*/, false);
 		
 		byte[] fullBMP2 = composeByteArray(header,encryptedData);
-		FileOutputStream outFile = new FileOutputStream(file.getPath() + "2");
+		FileOutputStream outFile = new FileOutputStream(Imagen.namePath(file, "E"));
 		outFile.write(fullBMP2);
 
 		
@@ -67,9 +64,11 @@ public static void decryptFile(File file) throws IOException {
 		
 		//TODO Revisar porque el largo de <data> no es igual al de <encryptedData>
 		byte[] fullBMP2 = composeByteArray(header,decryptedData);
-		FileOutputStream outFile = new FileOutputStream(file.getPath() + "3");
+		FileOutputStream outFile = new FileOutputStream(Imagen.namePath(file, "D"));
 		outFile.write(fullBMP2);
 	}
+public static String namePath (File file, String num) {
+	return file.getPath().substring(0, file.getPath().length()-4).concat(num).concat(".bmp");
 	
-	
+}
 }
